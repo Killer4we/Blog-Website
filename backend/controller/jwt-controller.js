@@ -11,7 +11,7 @@ export const authenticateToken = (request, response, next) => {
   }
   jwt.verify(
     token,
-    "e027198548f5bdf1ccc7ce8e8fbdbb1fefef2a6a05fc55d87396b8cde0d340b21e856d851ee82851667f2111f53b857ff5fc17fafed0bf50355de5e54c1f499b",
+    process.env.ACCESS_SECRET_KEY,
     (error, user) => {
       if (error) {
         return response.status(403).json({ msg: "Invalid Token" });

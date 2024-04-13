@@ -33,12 +33,12 @@ export const loginUser = async (request, response) => {
     if (match) {
       const accessToken = jwt.sign(
         user.toJSON(),
-        "e027198548f5bdf1ccc7ce8e8fbdbb1fefef2a6a05fc55d87396b8cde0d340b21e856d851ee82851667f2111f53b857ff5fc17fafed0bf50355de5e54c1f499b",
+        process.env.ACCESS_SECRET_KEY,
         { expiresIn: "15m" }
       );
       const refreshToken = jwt.sign(
         user.toJSON(),
-        "7a78927b3d1c4b0151d8c6bf67ba7f3933d29ce79679390483ec23f816d0c08cb66e81ca2a4191f60aba9382a3e0bad6727ecf4d6d7a9aa95a760dda59e6c17f"
+        process.env.REFRESH_SECRET_KEY
       );
 
       const newToken = new Token({ token: refreshToken });

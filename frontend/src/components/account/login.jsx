@@ -105,11 +105,11 @@ const Login = ({ isUserAuthenticated }) => {
 
       sessionStorage.setItem(
         "accessToken",
-        "Bearer ${response.data.accessToken}"
+        `Bearer ${response.data.accessToken}`
       );
       sessionStorage.setItem(
         "refreshToken",
-        "Bearer ${response.data.refreshToken}"
+        `Bearer ${response.data.refreshToken}`
       );
 
       setAccount({
