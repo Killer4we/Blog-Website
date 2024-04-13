@@ -8,7 +8,7 @@ let gfs, gridfsBucket;
 const conn = mongoose.connection;
 conn.once("open", () => {
   gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
-    bucketName: "fs",
+    bucketName: "fs"
   });
   gfs = grid(conn.db, mongoose.mongo);
   gfs.collection("fs");

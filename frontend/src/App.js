@@ -13,6 +13,8 @@ import Login from "./components/account/login";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
 import CreatePost from "./components/create/CreatePost";
+import About from "./components/about/About";
+import Contact from "./components/contact/Contact";
 
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   return isAuthenticated ? (
@@ -51,6 +53,19 @@ function App() {
               <Route path="/create" element={<CreatePost />} />
             </Route>
 
+            <Route
+              path="/about"
+              element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+            >
+              <Route path="/about" element={<About />} />
+            </Route>
+
+            <Route
+              path="/contact"
+              element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+            >
+              <Route path="/contact" element={<Contact />} />
+            </Route>
           </Routes>
         </div>
       </BrowserRouter>

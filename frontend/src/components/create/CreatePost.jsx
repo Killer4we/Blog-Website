@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { AddCircle as ADD } from "@mui/icons-material";
 import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import { API } from "../../service/api";
 
@@ -30,7 +30,8 @@ const StyledFormControl = styled(FormControl)`
 
 const InputTextField = styled(InputBase)`
   flex: 1;
-  margin: 0 15px;
+  margin-right: 15px;
+  // margin: 0 15px;
   background: #eeeeee;
   padding-left: 1%;
   font-size: 25px;
@@ -38,14 +39,14 @@ const InputTextField = styled(InputBase)`
 
 const Textarea = styled(TextareaAutosize)`
   width: 100%;
-  margin-top: 50px;
-  font-size: 13px;
+  margin-top: 30px;
+  font-size: 18px;
 `;
 
 const initialPost = {
   title: "",
   description: "",
-  picture: "",
+  picture: "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
   username: "",
   categories: "",
   createDate: new Date(),
@@ -58,10 +59,9 @@ const CreatePost = () => {
   const { account } = useContext(DataContext);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const url = post.picture
-    ? post.picture
-    : "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
+  const url = post.picture;
 
   useEffect(() => {
     const getImage = async () => {
@@ -82,11 +82,18 @@ const CreatePost = () => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
+  const savePost = async () => {
+    let response = await API.createPost(post);
+    if(response.isSuccess){
+      navigate('/');
+    }
+  }
+
   return (
     <Container>
       <Image src={url} alt="banner" />
       <StyledFormControl>
-        <label htmlFor="fileinput">
+        {/* <label htmlFor="fileinput">
           <ADD
             fontSize="large"
             color="action"
@@ -98,13 +105,13 @@ const CreatePost = () => {
           id="fileinput"
           style={{ display: "none" }}
           onChange={(e) => setFile(e.target.files[0])}
-        />
+        /> */}
         <InputTextField
           placeholder="Blog Title"
           onChange={(e) => handleChange(e)}
           name="title"
         />
-        <Button variant="contained">Publish</Button>
+        <Button variant="contained" onClick={() => savePost()}>Publish</Button>
       </StyledFormControl>
       <Textarea
         minRows={5}
