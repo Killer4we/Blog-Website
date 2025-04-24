@@ -20,9 +20,6 @@ export default function Header() {
           <AiOutlineSearch/>
         </Button>
         <div className='flex gap-2 md:order-2'>
-          {/* <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
-            <FaMoon/>
-          </Button> */}
           <Link to='/signin'>
           <Button className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
             Sign In
